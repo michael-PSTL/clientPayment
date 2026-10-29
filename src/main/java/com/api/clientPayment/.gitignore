@@ -1,35 +1,16 @@
 
-# ==============================
-# Credenciais e configurações locais
-# ==============================
-
+# Credenciais locais
 /config/mercados.json
-
 .env
 .env.*
 
-# Configurações locais do Spring
-application-local.properties
-application-local.yml
-application-local.yaml
-
-# ==============================
-# Java / Maven
-# ==============================
-
-target/
-*.class
-
-# ==============================
-# IntelliJ IDEA
-# ==============================
-
+# IntelliJ
 .idea/
 *.iml
 
-# ==============================
-# Sistema operacional
-# ==============================
+# Maven
+target/
 
+# Sistema operacional
 .DS_Store
 Thumbs.db
