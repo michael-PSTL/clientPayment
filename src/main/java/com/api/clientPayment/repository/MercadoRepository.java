@@ -26,18 +26,30 @@ public class MercadoRepository {
 
     private void carregarMercados() {
 
-        File arquivo = new File("config/mercados.json");
+        String mercadosJson = System.getenv("MERCADOS_JSON");
 
         try {
 
-            Map<String, List<Mercado>> dados =
-                    objectMapper.readValue(
-                            arquivo,
-                            new TypeReference<>() {}
-                    );
+            Map<String, List<Mercado>> dados;
 
-            List<Mercado> mercadosArquivo =
-                    dados.get("mercados");
+            if (mercadosJson != null && !mercadosJson.isBlank()) {
+
+                dados = objectMapper.readValue(
+                        mercadosJson,
+                        new TypeReference<>() {}
+                );
+
+            } else {
+
+                File arquivo = new File("config/mercados.json");
+
+                dados = objectMapper.readValue(
+                        arquivo,
+                        new TypeReference<>() {}
+                );
+            }
+
+            List<Mercado> mercadosArquivo = dados.get("mercados");
 
             if (mercadosArquivo != null) {
                 mercados.addAll(mercadosArquivo);
@@ -46,7 +58,7 @@ public class MercadoRepository {
         } catch (IOException e) {
 
             throw new RuntimeException(
-                    "Erro ao carregar mercados.json",
+                    "Erro ao carregar mercados",
                     e
             );
         }
